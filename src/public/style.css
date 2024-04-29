@@ -1,0 +1,135 @@
+
+header  {
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('/images/image.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 500px;
+    margin: 0 auto;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: auto;
+    
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    filter: blur(8px);
+}
+
+
+.calculator {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    margin: 20px auto;
+    height: 700px;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #373737ce;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.379);
+    
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 600px;
+    height: 700px;
+    margin-bottom: 10px;
+}
+
+.numbers {
+    width: 300px;
+    height: 500px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+
+.number {
+    width: 80px;
+    height: 80px;
+}
+
+.operator {
+    width: 80px;
+    height: 80px;
+}
+
+.operators {
+    width: 220px;
+    height: 500px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.equal {
+    width: 140px;
+    height: 80px;
+    border-radius: 15%;
+}
+
+.display {
+    width: 580px;
+    height: 80px;
+    background-color: #333;
+    color: #fff;
+    font-size: 40px;
+    text-align: right;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+
+}
+
+
+button {
+    background-color: #e38a25;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 20%;
+    box-shadow: 0 0 10px e3c725;
+    font-size: 30px;
+}
+
+button:hover {
+    background-color: #e3c725;
+    filter: drop-shadow(1px 1px 10px #bba004);
+}
