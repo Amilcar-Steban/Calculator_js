@@ -48,12 +48,6 @@ function calcular(operacion) {
     }
 }
 
-equal.addEventListener('click', () => {
-    let operacion = label.textContent;
-    result = calcular(operacion);
-    label.textContent = result;
-});
-
 // Realiza una solicitud GET a la ruta API
 fetch('/api/history')
 .then(response => response.json())  // Convierte la respuesta en JSON
@@ -67,7 +61,7 @@ fetch('/api/history')
         const row = document.createElement('tr');
 
         // Crea y añade las celdas a la fila
-        ['id', 'operation', 'result' ].forEach(key => {
+        [ 'operation', 'result' ].forEach(key => {
             const cell = document.createElement('td');
             cell.textContent = item[key];
             row.appendChild(cell);
@@ -79,7 +73,48 @@ fetch('/api/history')
 })
 .catch(error => console.error('Error:', error));
 
+function updateHistory() {
+    fetch('/api/history')
+    .then(response => response.json())
+    .then(data => {
+        // Obtiene una referencia al elemento <tbody>
+        const tbody = document.querySelector('#history-table tbody');
+        tbody.innerHTML = '';
+        data.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${row.operation}</td><td>${row.result}</td>`;
+            tbody.appendChild(tr);
+        });
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+equal.addEventListener('click', () => {
+    let operacion = label.textContent;
+    result = calcular(operacion);
+    label.textContent = result;
+
+    fetch('/api/save', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ operation: operacion, result: result }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message);
+        updateHistory();  // Actualiza la tabla del historial después de guardar un resultado
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+});
+
 /* --------------------------------------------------- */
+
 point.addEventListener('click', () => {
     label.textContent += '.';
 });

@@ -139,8 +139,15 @@ button:hover {
     width: 40%;
     margin: auto;
     overflow: auto;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.788);
+    height: 400px;
+}
+
+tbody {
+    height: 400px;
+    width: 100%;
+    overflow-y: auto;
 }
 
 #history-table {
@@ -152,22 +159,60 @@ button:hover {
 
 #history-table th, #history-table td {
     padding: 15px;
-    text-align: left;
+    text-align: center;
     color: #fff;
     background-color: #373737ce;
+    font-size: 18px;
 
 }
 
 #history-table th {
     background-color: #333333;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
 }
 
-
 #history-table tbody tr:hover {
-    background-color: #8e2525;
+    background-color: #dcdcdc;
 }
 
 @keyframes fadeIn {
     0% {opacity: 0;}
     100% {opacity: 1;}
+}
+
+/* Esto afectará a todos los elementos en la página */
+::-webkit-scrollbar {
+    width: 12px; /* Ancho del scrollbar */
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #6c6c6c; /* Color de fondo del track */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #333333; /* Color de fondo del handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color de fondo del handle al pasar el mouse */
+}
+
+.tittle-head {
+    width: 100%;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: auto;
+    color: #fff;
+    font-size: 18px;
+    background-color: #333333;
+
 }

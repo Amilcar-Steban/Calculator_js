@@ -1,7 +1,7 @@
 const express = require('express'); const path = require('path');
 const app = express();
 const mysql = require('mysql');
-
+app.use(express.json());
 app.use(express.static(path.join( __dirname, 'public')));
 app.use(express.static(path.join( __dirname, '')));
 app.use('/index.js', express.static(path.join(__dirname, 'index.js')));
@@ -22,11 +22,20 @@ db.connect((err) => {
 
 // Crea una ruta API para obtener el historial de la calculadora
 app.get('/api/history', (req, res) => {
-    const sql = 'SELECT * FROM calculator_history';
-    db.query(sql, (err, results) => {
-        if (err) throw err;
-        res.json(results);
-    });
+  const sql = 'SELECT * FROM calculator_history ORDER BY timestamp DESC';
+  db.query(sql, (err, results) => {
+      if (err) throw err;
+      res.json(results);
+  });
+});
+
+app.post('/api/save', (req, res) => {
+  const { operation, result } = req.body;
+  const sql = 'INSERT INTO calculator_history (operation, result) VALUES (?, ?)';
+  db.query(sql, [operation, result], (err, results) => {
+      if (err) throw err;
+      res.json({ message: 'Operation and result saved to the database' });
+  });
 });
 
 app.listen(3675, () => {
