@@ -17,18 +17,19 @@ body {
     background-position: center;
     height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: around;
 }
 
 main {
     padding: 20px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 500px;
-    margin: 0 auto;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin: 0px auto;
     border-radius: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -132,4 +133,41 @@ button {
 button:hover {
     background-color: #e3c725;
     filter: drop-shadow(1px 1px 10px #bba004);
+}
+
+.history-container {
+    width: 40%;
+    margin: auto;
+    overflow: auto;
+    border-radius: 5px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.788);
+}
+
+#history-table {
+    width: 100%;
+    border-collapse: collapse;
+    animation: fadeIn 1s ease-in-out;
+}
+
+
+#history-table th, #history-table td {
+    padding: 15px;
+    text-align: left;
+    color: #fff;
+    background-color: #373737ce;
+
+}
+
+#history-table th {
+    background-color: #333333;
+}
+
+
+#history-table tbody tr:hover {
+    background-color: #8e2525;
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
 }
