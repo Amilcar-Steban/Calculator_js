@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+data:
+  my.cnf: |
+    [mysqld]
+    bind-address = 0.0.0.0
+
+  initdb.sql: |
+    CREATE DATABASE IF NOT EXISTS calculator_db;
+    CREATE USER IF NOT EXISTS 'calculator'@'%' IDENTIFIED BY 'pass123.';
+    GRANT ALL PRIVILEGES ON calculator_db.* TO 'calculator'@'%';
+    FLUSH PRIVILEGES;
+    USE calculator_db;
+    CREATE TABLE calculator_history (
+      id INT AUTO_INCREMENT,
+      operation VARCHAR(255),
+      result DECIMAL(10, 2),
+      timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      PRIMARY KEY(id)
+    );
+    ALTER USER 'calculator'@'%' IDENTIFIED WITH mysql_native_password BY 'pass123.';
+    FLUSH PRIVILEGES;

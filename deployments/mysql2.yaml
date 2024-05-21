@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:5.7
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root_password
+        - name: MYSQL_DATABASE
+          value: calculator_db
+        - name: MYSQL_USER
+          value: calculator
+        - name: MYSQL_PASSWORD
+          value: pass123.
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: mysql-config-volume
+          mountPath: /etc/mysql/my.cnf
+          subPath: my.cnf
+        - name: mysql-initdb-volume
+          mountPath: /docker-entrypoint-initdb.d/initdb.sql
+          subPath: initdb.sql
+      volumes:
+      - name: mysql-config-volume
+        configMap:
+          name: mysql-config
+          items:
+          - key: my.cnf
+            path: my.cnf
+      - name: mysql-initdb-volume
+        configMap:
+          name: mysql-config
+          items:
+          - key: initdb.sql
+            path: initdb.sql

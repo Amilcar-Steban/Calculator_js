@@ -8,17 +8,25 @@ app.use('/index.js', express.static(path.join(__dirname, 'index.js')));
 
 // Crea una conexión a la base de datos
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'calculator',
-    password: 'pass123.',
-    database: 'calculator_db'
+  host: 'mysql.databases.svc.cluster.local',
+  user: 'calculator',
+  password: 'pass123.',
+  database: 'calculator_db'
 });
 
+// Función de reintento para la conexión a la base de datos
+function connectWithRetry() {
+  return db.connect((err) => {
+      if (err) {
+          console.error('Failed to connect to db - retrying in 5 sec', err);
+          setTimeout(connectWithRetry, 5000);
+      }
+      console.log('Connected to the database');
+  });
+}
+
 // Conéctate a la base de datos
-db.connect((err) => {
-    if (err) throw err;
-    console.log('Connected to the database');
-});
+connectWithRetry();
 
 // Crea una ruta API para obtener el historial de la calculadora
 app.get('/api/history', (req, res) => {
